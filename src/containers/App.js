@@ -1,69 +1,39 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import '../App.css';
 import UrlInput from '../components/UrlInput';
 import Subreddits from '../components/Subreddits';
 import History from '../components/History';
+import { fetchTopics, deleteSubreddit } from '../actions';
 
 class App extends Component {
-  baseUrl = 'https://www.reddit.com';
-
-  state = {
-    redditTopics: [],
-    history: []
-  }
-
   urlSubmitHandler = subreddit => {
-    console.log('download topics from:', subreddit);
     if (!subreddit) {
       return;
     }
-
-    fetch(`${this.baseUrl}/r/${subreddit}.json`)
-      .then(result => result.json())
-      .then(jsonResult => {
-        const oldTopics = this.state.redditTopics;
-        const newData = {};
-        newData[subreddit] = this.parseRedditTopics(jsonResult);
-
-        this.setState({
-          redditTopics: {
-            ...newData, ...oldTopics
-          },
-          history: [...this.state.history, subreddit]
-        });
-      })
-      .catch(e => console.log(e));
-  }
-
-  parseRedditTopics = json => {
-    if (!json.data) {
-      return [];
-    }
-    return json.data.children.map(topic => {
-      const { title, author } = topic.data
-      const url = `${this.baseUrl}/${topic.data.permalink}`;
-      return { title, author, url };
-    });
+    this.props.dispatch(fetchTopics(subreddit));
   }
 
   deleteClickHandler = subreddit => {
-    const oldData = { ...this.state.redditTopics };
-    delete oldData[subreddit];
-    this.setState({ redditTopics: oldData });
+    this.props.dispatch(deleteSubreddit(subreddit));
   }
 
   render() {
-    const subreddits = Object.keys(this.state.redditTopics)
-      .map((s, i) => <Subreddits key={i} topics={this.state.redditTopics[s]} name={s} onDeleteClick={() => this.deleteClickHandler(s)} />);
+    const subreddits = Object.keys(this.props.subreddits)
+      .map((s, i) => <Subreddits key={i} topics={this.props.subreddits[s].topics} name={s} onDeleteClick={() => this.deleteClickHandler(s)} />);
 
     return (
       <div className="App">
         <UrlInput onSubmit={this.urlSubmitHandler} />
-        <History history={this.state.history} />
+        <History history={this.props.history} />
         {subreddits}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { subreddits: state.subreddits, history: state.history }
+};
+
+export default connect(mapStateToProps)(App);

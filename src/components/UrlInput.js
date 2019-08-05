@@ -1,27 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class UrlInput extends Component {
-    state = {
-        input: 'programming'
-    }
+const UrlInput = (props) => {
+    const [input, setInput] = useState('programming');
 
-    inputChangeHandler = (event) => {
-        this.setState({ input: event.target.value });
-    }
-
-    buttonClickHandler = () => {
-        this.props.onSubmit(this.state.input);
-    }
-
-    render() {
-        return (
-            <div>
-                <p>Subreddit loader</p>
-                <input type="text" value={this.state.input} onChange={this.inputChangeHandler}></input>
-                <button onClick={this.buttonClickHandler}>Send</button>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <p>Subreddit loader</p>
+            <input type="text" value={input} onChange={(e) => setInput(e.target.value)}></input>
+            <button onClick={() => props.onSubmit(input)}>Send</button>
+        </div>
+    );
 };
 
 export default UrlInput;

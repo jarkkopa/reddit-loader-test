@@ -1,26 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import '../App.css';
+import { fetchTopics, deleteSubreddit } from '../actions';
+
 import UrlInput from '../components/UrlInput';
 import Subreddits from '../components/Subreddits';
 import History from '../components/History';
-import { fetchTopics, deleteSubreddit } from '../actions';
+
+import '../App.css';
 
 class App extends Component {
   urlSubmitHandler = subreddit => {
     if (!subreddit) {
       return;
     }
-    this.props.dispatch(fetchTopics(subreddit));
+    this.props.fetchSubreddit(subreddit);
   }
 
   deleteClickHandler = subreddit => {
-    this.props.dispatch(deleteSubreddit(subreddit));
+    this.props.deleteSubreddit(subreddit);
   }
 
   render() {
     const subreddits = Object.keys(this.props.subreddits)
-      .map((s, i) => <Subreddits key={i} topics={this.props.subreddits[s].topics} name={s} onDeleteClick={() => this.deleteClickHandler(s)} />);
+      .map((s, i) => {
+        const sub = this.props.subreddits[s];
+        return <Subreddits key={i}
+          topics={sub.topics}
+          name={s}
+          loading={sub.loading}
+          onDeleteClick={() => this.deleteClickHandler(s)} />
+      });
 
     return (
       <div className="App">
@@ -36,4 +45,11 @@ const mapStateToProps = state => {
   return { subreddits: state.subreddits, history: state.history }
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteSubreddit: (subreddit) => { dispatch(deleteSubreddit(subreddit)) },
+    fetchSubreddit: (subreddit) => { dispatch(fetchTopics(subreddit)) }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

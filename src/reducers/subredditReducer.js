@@ -10,7 +10,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 [action.subreddit]: {
-                    loading: true
+                    loading: true,
+                    updated: Date.now()
                 }
             };
 
@@ -20,7 +21,7 @@ const reducer = (state = initialState, action) => {
                 [action.subreddit]: {
                     topics: action.topics,
                     loading: false,
-                    //loadTime: Date.now()
+                    updated: Date.now()
                 }
             };
 

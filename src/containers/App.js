@@ -20,6 +20,7 @@ class App extends Component {
 
   render() {
     const subreddits = Object.keys(this.props.subreddits)
+      .sort((a, b) => this.props.subreddits[a].updated < this.props.subreddits[b].updated ? 1 : -1)
       .map((s, i) => {
         const sub = this.props.subreddits[s];
         return <Subreddits key={i}

@@ -6,8 +6,6 @@ import UrlInput from '../components/UrlInput';
 import Subreddits from '../components/Subreddits';
 import History from '../components/History';
 
-import '../App.css';
-
 class App extends Component {
   urlSubmitHandler = subreddit => {
     if (!subreddit) {

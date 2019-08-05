@@ -8,9 +8,6 @@ import History from '../components/History';
 
 class App extends Component {
   urlSubmitHandler = subreddit => {
-    if (!subreddit) {
-      return;
-    }
     this.props.fetchSubreddit(subreddit);
   }
 
@@ -31,7 +28,7 @@ class App extends Component {
       });
 
     return (
-      <div className="App">
+      <div>
         <UrlInput onSubmit={this.urlSubmitHandler} />
         <History history={this.props.history} />
         {subreddits}

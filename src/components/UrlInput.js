@@ -7,7 +7,7 @@ const UrlInput = (props) => {
         <div>
             <p>Subreddit loader</p>
             <input type="text" value={input} onChange={(e) => setInput(e.target.value)}></input>
-            <button onClick={() => props.onSubmit(input)}>Send</button>
+            <button onClick={() => input ? props.onSubmit(input) : () => { }}>Send</button>
         </div>
     );
 };

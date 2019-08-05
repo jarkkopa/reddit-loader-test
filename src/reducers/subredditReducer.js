@@ -10,6 +10,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 [action.subreddit]: {
+                    ...state[action.subreddit], // Don't clear topics if they already exist
                     loading: true,
                     updated: Date.now()
                 }

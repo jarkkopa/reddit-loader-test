@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <div>
         <UrlInput onSubmit={this.urlSubmitHandler} />
-        <History history={this.props.history} />
+        <History />
         {subreddits}
       </div>
     );
@@ -38,7 +38,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return { subreddits: state.subreddits, history: state.history }
+  return { subreddits: state.subreddits }
 };
 
 const mapDispatchToProps = dispatch => {

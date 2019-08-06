@@ -6,7 +6,8 @@ const subreddits = props => {
 
     return (
         <div>
-            <span>{props.loading ? <span>Loading: </span> : null}<b>{`/r/${props.name}`}</b></span> - <button onClick={props.onDeleteClick}>Delete</button>
+            {props.loading ? <span>Loading: </span> : null}
+            <b>{`/r/${props.name}`}</b> - <button onClick={props.onDeleteClick}>Delete</button>
             {topics}
         </div>
     );

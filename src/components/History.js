@@ -1,11 +1,11 @@
 import React from 'react';
+import HistoryItems from './HistoryItems';
 
 const history = props => {
-    const history = props.history.map((sub, index) => <div key={index}>{sub}</div>);
     return (
         <div className="History">
             <div>Loading history:</div>
-            {history}
+            <HistoryItems/>
         </div>
     );
 }

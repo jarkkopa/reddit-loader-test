@@ -1,23 +1,3 @@
-/*
-
-fetch(`${this.baseUrl}/r/${subreddit}.json`)
-      .then(result => result.json())
-      .then(jsonResult => {
-        const oldTopics = this.state.redditTopics;
-        const newData = {};
-        newData[subreddit] = this.parseRedditTopics(jsonResult);
-
-        this.setState({
-          redditTopics: {
-            ...newData, ...oldTopics
-          },
-          history: [...this.state.history, subreddit]
-        });
-      })
-      .catch(e => console.log(e));
-
-*/
-
 const baseUrl = 'https://www.reddit.com';
 
 const fetchTopics = (subreddit) => (dispatch) => {

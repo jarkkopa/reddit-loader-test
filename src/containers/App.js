@@ -7,14 +7,6 @@ import Subreddits from '../components/Subreddits';
 import History from '../components/History';
 
 class App extends Component {
-  urlSubmitHandler = subreddit => {
-    this.props.fetchSubreddit(subreddit);
-  }
-
-  deleteClickHandler = subreddit => {
-    this.props.deleteSubreddit(subreddit);
-  }
-
   render() {
     const subreddits = Object.keys(this.props.subreddits)
       .sort((a, b) => this.props.subreddits[a].updated < this.props.subreddits[b].updated ? 1 : -1)
@@ -24,12 +16,12 @@ class App extends Component {
           topics={sub.topics}
           name={s}
           loading={sub.loading}
-          onDeleteClick={() => this.deleteClickHandler(s)} />
+          onDeleteClick={() => this.props.deleteSubreddit(s)} />
       });
 
     return (
       <div>
-        <UrlInput onSubmit={this.urlSubmitHandler} />
+        <UrlInput onSubmit={this.props.fetchSubreddit} />
         <History />
         {subreddits}
       </div>

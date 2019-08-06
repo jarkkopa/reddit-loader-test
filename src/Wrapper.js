@@ -5,10 +5,10 @@ import App from './containers/App';
 
 class Wrapper extends React.Component {
     render() {
-        return(
-            <div>
-               <App></App>
-            </div>
+        return (
+            <React.Fragment>
+                <App />
+            </React.Fragment>
         )
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchTopics, deleteSubreddit } from '../actions';
+import { fetchTopics } from '../actions';
 
 import UrlInput from '../components/UrlInput';
 import Subreddits from '../components/Subreddits';
@@ -15,14 +15,13 @@ class App extends Component {
         return <Subreddits key={i}
           topics={sub.topics}
           name={s}
-          loading={sub.loading}
-          onDeleteClick={() => this.props.deleteSubreddit(s)} />
+          loading={sub.loading} />
       });
 
     return (
       <div>
         <UrlInput onSubmit={this.props.fetchSubreddit} />
-        <History />
+        <History/>
         {subreddits}
       </div>
     );
@@ -35,7 +34,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteSubreddit: (subreddit) => { dispatch(deleteSubreddit(subreddit)) },
     fetchSubreddit: (subreddit) => { dispatch(fetchTopics(subreddit)) }
   }
 };

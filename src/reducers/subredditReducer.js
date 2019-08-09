@@ -6,11 +6,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.fecthSubreddit:
-            console.log('fetch subreddit:', action.subreddit);
             return {
                 ...state,
                 [action.subreddit]: {
-                    ...state[action.subreddit], // Don't clear topics if they already exist
+                    ...state[action.subreddit], // Copy previous object with topics if exists
                     loading: true,
                     updated: Date.now()
                 }

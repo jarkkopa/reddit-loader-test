@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const UrlInput = (props) => {
-    const [input, setInput] = useState('programming');
+    const [input, setInput] = useState('news');
 
     return (
         <div>

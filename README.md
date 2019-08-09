@@ -1,6 +1,6 @@
 ## Devools
-React (Chrome): https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
-Redux DevTools Extension: https://github.com/zalmoxisus/redux-devtools-extension
+React (Chrome): https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en <br>
+Redux DevTools Extension: https://github.com/zalmoxisus/redux-devtools-extension <br>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
